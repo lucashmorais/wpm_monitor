@@ -20,7 +20,7 @@ dateHuman = os.popen(f"date").read().strip("\n")
 fileNameStem = Path(f"./{fileName}").stem
 logFile = f".{fileNameStem}_wpm.log"
 
-wpm = "Undefined"
+wpm = "Undef"
 
 if Path(logFile).is_file():
     with open(logFile, "r") as myfile:
@@ -29,7 +29,7 @@ if Path(logFile).is_file():
          oldWordCount = int(res.group(1))
          oldTime = int(res.group(2))
     
-    wpm = calculateWpm(wordCount, oldWordCount, dateSeconds, oldTime)
+    wpm = round(calculateWpm(wordCount, oldWordCount, dateSeconds, oldTime), 2)
 
 with open(logFile, "a") as myfile:
-    myfile.write(f"{wordCount}\t{dateSeconds}\t{round(wpm, 2)}\t{dateHuman}\n")
+    myfile.write(f"{wordCount}\t{dateSeconds}\t{wpm}\t{dateHuman}\n")
